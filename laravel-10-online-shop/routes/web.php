@@ -4,6 +4,9 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\HomeController;
+use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\admin\ProductSubCategoryController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\Admin\TempImagesController;
 use Illuminate\Http\Request;
@@ -64,10 +67,21 @@ Route::group(['prefix' => 'admin'], function (){
         Route::put('/brands/{brand}', [BrandController::class, 'update'])->name('brands.update');
         Route::delete('/brands/{brand}', [BrandController::class, 'destroy'])->name('brands.delete');
 
+
+        // Product Routes
+
+        Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+        Route::get('/product-subcategories', [ProductSubCategoryController::class, 'index'])->name('product-subcategories.index');
+        Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+        Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+        Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+        Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+        Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.delete');
         // temp-images.create
 
         Route::post('/upload-temp-images', [TempImagesController::class, 'create'])->name('temp-images.create');
-
+        Route::post('/product-images/update', [ProductImageController::class, 'update'])->name('product-images.update');
+        Route::delete('/product-images', [ProductImageController::class, 'destroy'])->name('product-images.destroy');
         Route::get('/getSlug',function (Request $request){
             $slug = '';
                 if(!empty($request->title))
