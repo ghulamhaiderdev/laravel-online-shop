@@ -19,4 +19,9 @@ class Category extends Model
         }
         return $options;
     }
+
+    public function sub_category()
+    {
+        return $this->hasMany(SubCategory::class);
+    }
 }

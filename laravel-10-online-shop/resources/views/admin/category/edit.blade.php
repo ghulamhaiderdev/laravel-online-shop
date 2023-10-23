@@ -32,7 +32,7 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="email">Slug</label>
-                            <input type="text" name="slug" id="slug" class="form-control" placeholder="Slug" value="{{ $category->slug }}" readonly>
+                            <input type="text" name="slug" id="slug" class="form-control" placeholder="Slug" value="{{ $category->slug }}" >
                             <p></p>
                         </div>
                     </div>
@@ -57,6 +57,15 @@
                                <option value="1" {{ $category->status == '1' ? 'selected': '' }}>Active</option>
                                <option value="0" {{ $category->status == '0' ? 'selected': '' }}>Block</option>
                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="showHome">Show Home</label>
+                            <select class="form-control" id="showHome" name="show_home">
+                                <option value="Yes" {{ $category->show_home == 'Yes' ? 'selected': '' }}>Yes</option>
+                                <option value="No" {{ $category->show_home == 'No' ? 'selected': '' }}>No</option>
+                            </select>
                         </div>
                     </div>
                 </div>

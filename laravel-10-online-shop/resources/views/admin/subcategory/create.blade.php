@@ -5,7 +5,7 @@
     <div class="container-fluid my-2">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Create Category</h1>
+                <h1>Create Sub Category</h1>
             </div>
             <div class="col-sm-6 text-right">
                 <a href="{{ route('subcategories.index') }}" class="btn btn-primary">Back</a>
@@ -32,7 +32,7 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="email">Slug</label>
-                            <input type="text" name="slug" id="slug" class="form-control" placeholder="Slug" readonly>
+                            <input type="text" name="slug" id="slug" class="form-control" placeholder="Slug">
                             <p></p>
                         </div>
                     </div>
@@ -53,6 +53,15 @@
                                <option value="1">Active</option>
                                <option value="0">Inactive</option>
                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="showHome">Show Home</label>
+                            <select class="form-control" id="showHome" name="show_home">
+                                <option value="Yes" >Yes</option>
+                                <option value="No">No</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -85,7 +94,8 @@
                     "name": $('#name').val(),
                     "slug": $('#slug').val(),
                     "status": $('#status').val(),
-                    "category_id": $('#category-id').val()
+                    "category_id": $('#category-id').val(),
+                    "show_home": $('#showHome').val()
                 },
                 dataType: 'json',
                 success: function (response){

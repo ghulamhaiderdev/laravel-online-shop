@@ -32,7 +32,7 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="email">Slug</label>
-                            <input type="text" name="slug" id="slug" class="form-control" placeholder="Slug" readonly>
+                            <input type="text" name="slug" id="slug" class="form-control" placeholder="Slug" >
                             <p></p>
                         </div>
                     </div>
@@ -54,6 +54,15 @@
                                <option value="1">Active</option>
                                <option value="0">Inactive</option>
                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="showHome">Show Home</label>
+                            <select class="form-control" id="showHome" name="show_home">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -86,7 +95,8 @@
                     "name": $('#name').val(),
                     "slug": $('#slug').val(),
                     "status": $('#status').val(),
-                    "image_id": $("#image_id").val()
+                    "image_id": $("#image_id").val(),
+                    "show_home": $("#showHome").val()
                 },
                 dataType: 'json',
                 success: function (response){

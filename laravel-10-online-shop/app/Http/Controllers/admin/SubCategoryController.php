@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\TempImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,14 +15,18 @@ class SubCategoryController extends Controller
 {
     public function index(Request $request)
     {
+//        DB::enableQueryLog();
         $categories = SubCategory::select('sub_categories.*', 'categories.name as categoryName')
                                    ->latest('id')
-                                   ->leftJoin('categories', 'category_id', 'sub_categories.category_id');
+                                   ->leftJoin('categories', 'categories.id', 'sub_categories.category_id');
         if(!empty($request->get('keyword')))
         {
             $categories = $categories->where('name', 'like', '%'.$request->get('keyword').'%');
         }
         $subCategories =  $categories->paginate(10);
+//        $queries = DB::getQueryLog();
+
+//        dd($subCategories);
         return view('admin.subcategory.index',compact('subCategories'));
     }
 
@@ -37,7 +42,6 @@ class SubCategoryController extends Controller
             'slug' => 'required|unique:sub_categories',
             'category_id' => 'required'
         ]);
-
         if ($validator->passes())
         {
             $subSategory = new SubCategory();
@@ -45,6 +49,7 @@ class SubCategoryController extends Controller
             $subSategory->slug = $request->slug;
             $subSategory->status = $request->status;
             $subSategory->category_id = $request->category_id;
+            $subSategory->show_home = $request->show_home;
             $subSategory->save();
 
 
@@ -95,6 +100,7 @@ class SubCategoryController extends Controller
             $subCategory->slug = $request->slug;
             $subCategory->status = $request->status;
             $subCategory->category_id = $request->category_id;
+            $subCategory->show_home = $request->show_home;
             $subCategory->save();
 
 
